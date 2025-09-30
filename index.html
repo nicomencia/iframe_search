@@ -16,13 +16,12 @@
       --text:#1f2937;
       --muted:#6b7280;
       --bg:#f8fafc;
-      --card:#ffffff;
       --border:#e5e7eb;
     }
     body{ color:var(--text); background-color:var(--bg); }
     header{ background:#fff; border-bottom:1px solid var(--border); }
     .brand{ display:flex; align-items:center; gap:.5rem; }
-    .brand img{ height:64px; width:auto; display:block; }
+    .brand img{ height:128px; width:auto; display:block; } /* duplicado desde 64px */
     .hero{ min-height:64vh; display:flex; align-items:center; }
     .hero .lead{ color:var(--muted); }
     .btn-cta,
@@ -42,15 +41,6 @@
     .btn-cta:focus-visible{ outline:none; box-shadow:0 0 0 .25rem var(--focus-ring); }
 
     .features li{ margin-bottom:.5rem; }
-    .section{ padding:3rem 0; }
-    .card-link{
-      display:block; text-decoration:none; color:inherit;
-      background:var(--card); border:1px solid var(--border); border-radius:.75rem;
-      padding:1.25rem 1.25rem;
-      transition:box-shadow .15s ease, transform .15s ease, border-color .15s ease;
-    }
-    .card-link:hover{ box-shadow:0 6px 24px rgba(0,0,0,.06); transform:translateY(-2px); border-color:#d8dbe1; }
-    .eyebrow{ font-size:.85rem; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:.25rem; }
     .footer{ color:var(--muted); font-size:.9rem; }
     @media (prefers-reduced-motion:no-preference){
       .btn-cta{ transition:transform .15s ease; }
@@ -83,28 +73,6 @@
             <li>Disponibilidad en la región EU.</li>
           </ul>
         </div>
-      </div>
-    </section>
-
-    <!-- Sede Electrónica -->
-    <section class="section">
-      <div class="container">
-        <a class="card-link" href="https://egoitza.araba.eus/" target="_blank" rel="noopener" aria-label="Ir a Sede Electrónica de la Diputación Foral de Álava - egoitza">
-          <div class="row">
-            <div class="col-lg-10 mx-auto">
-              <div class="eyebrow">Sede Electrónica</div>
-              <h2 class="h4 mb-3">Sede Electrónica de la Diputación Foral de Álava - egoitza</h2>
-              <h3 class="h6 mb-2">Trámites de actualidad</h3>
-              <p class="mb-2">Principales trámites en vigor: Subvención destinada a incentivar la euskaldunización de personas adultas (Curso 2025-2026), Programa Araba(n) Bizi Bedi, Programa Kudeabide, Convocatoria de ayudas para proyectos de jóvenes para jóvenes.</p>
-              <h3 class="h6 mb-2">Mi Carpeta</h3>
-              <ul class="mb-0">
-                <li>Ver y gestionar datos personales y expedientes.</li>
-                <li>Realizar trámites online y hacer un seguimiento de los mismos.</li>
-                <li>Gestionar autorizaciones para actuar en nombre de otra persona o que actúen en el propio nombre; mantenerse informado/a de notificaciones, comunicaciones y avisos.</li>
-              </ul>
-            </div>
-          </div>
-        </a>
       </div>
     </section>
   </main>
