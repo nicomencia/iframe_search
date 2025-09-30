@@ -8,19 +8,50 @@
   <link rel="preconnect" href="https://cloud.google.com">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous">
   <style>
-    :root { --primary:#0d6efd; --text:#1f2937; --muted:#6b7280; --bg:#f8fafc; }
-    body { color:var(--text); background-color:var(--bg); }
-    header { background: #fff; border-bottom: 1px solid #e5e7eb; }
-    .brand { display:flex; align-items:center; gap:.5rem; }
-    .brand img { height:40px; width:auto; }
-    .hero { min-height: 70vh; display:flex; align-items:center; }
-    .hero .lead { color: var(--muted); }
-    .btn-cta { padding:.85rem 1.35rem; border-radius:999px; font-weight:600; }
-    .features li { margin-bottom:.5rem; }
-    .footer { color:var(--muted); font-size:.9rem; }
-    @media (prefers-reduced-motion: no-preference) {
-      .btn-cta { transition: transform .15s ease; }
-      .btn-cta:hover { transform: translateY(-1px); }
+    :root{
+      --brand-primary:#cc0066;           /* color del logo */
+      --brand-primary-hover:#b3005b;     /* ~10-12% más oscuro */
+      --brand-primary-active:#990050;    /* estado active */
+      --focus-ring:rgba(204,0,102,.35);  /* aro de enfoque accesible */
+      --text:#1f2937;
+      --muted:#6b7280;
+      --bg:#f8fafc;
+    }
+    body{ color:var(--text); background-color:var(--bg); }
+    header{ background:#fff; border-bottom:1px solid #e5e7eb; }
+    .brand{ display:flex; align-items:center; gap:.5rem; }
+    .brand img{ height:40px; width:auto; display:block; }
+    .hero{ min-height:70vh; display:flex; align-items:center; }
+    .hero .lead{ color:var(--muted); }
+    .btn-cta,
+    .btn.btn-primary{
+      background-color:var(--brand-primary);
+      border-color:var(--brand-primary);
+      color:#fff;
+      padding:.85rem 1.35rem;
+      border-radius:999px;
+      font-weight:600;
+    }
+    .btn.btn-primary:hover,
+    .btn-cta:hover{
+      background-color:var(--brand-primary-hover);
+      border-color:var(--brand-primary-hover);
+    }
+    .btn.btn-primary:active,
+    .btn-cta:active{
+      background-color:var(--brand-primary-active)!important;
+      border-color:var(--brand-primary-active)!important;
+    }
+    .btn.btn-primary:focus-visible,
+    .btn-cta:focus-visible{
+      outline:none;
+      box-shadow:0 0 0 .25rem var(--focus-ring);
+    }
+    .features li{ margin-bottom:.5rem; }
+    .footer{ color:var(--muted); font-size:.9rem; }
+    @media (prefers-reduced-motion:no-preference){
+      .btn-cta{ transition:transform .15s ease; }
+      .btn-cta:hover{ transform:translateY(-1px); }
     }
   </style>
 </head>
@@ -28,7 +59,8 @@
   <header class="py-3">
     <div class="container d-flex justify-content-between align-items-center">
       <a href="/" class="brand text-reset text-decoration-none" aria-label="Inicio">
-        <img src="/assets/logo.gif" alt="Diputación Foral de Álava">
+        <!-- Usa ruta relativa para evitar 404 en subpaths (p.ej., GitHub Pages) -->
+        <img src="assets/logo.gif" alt="Diputación Foral de Álava">
         <span class="sr-only">Diputación Foral de Álava</span>
       </a>
     </div>
@@ -73,7 +105,7 @@
   <script src="https://cloud.google.com/ai/gen-app-builder/client?hl=es"></script>
   <script>
     document.getElementById('openSearch').addEventListener('click', () => {
-      // El widget público se abre por triggerId
+      // El widget público se abre automáticamente por triggerId
     });
   </script>
 </body>
