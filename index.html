@@ -1,112 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Google Cloud Generative AI Search - Demo estática</title>
-
-  <!-- Bootstrap 4 (opcional, ya estaba en tu HTML) -->
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-MlwrP8xA1Zr+oYQq1n8nPZqAq6nT4F8v4oD2mP3gDkS9L1mF4C3K1B0lGvZl5x2M"
-    crossorigin="anonymous"
-  />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Búsqueda con IA | Empresa</title>
+  <link rel="preconnect" href="https://cloud.google.com">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous">
   <style>
-    .search-widget-container { max-width: 800px; margin: 2rem auto; padding: 1rem; }
-    .search-input-wrapper { position: relative; margin-bottom: 1rem; }
-    #searchWidgetTrigger {
-      border-radius: 25px; border: 2px solid #e9ecef; padding: 12px 20px;
-      font-size: 16px; transition: all 0.3s ease;
-    }
-    #searchWidgetTrigger:focus {
-      border-color: #007bff; box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25); outline: none;
-    }
-    .search-status { margin-top: 1rem; padding: 0.75rem; border-radius: 0.375rem; font-size: 0.875rem; }
-    .status-loading { background-color: #fff3cd; border: 1px solid #ffeaa7; color: #856404; }
-    .status-success { background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
-    .status-error { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
-    .dev-note { font-size: 0.85rem; color: #6c757d; }
+    :root { --primary:#0d6efd; --text:#1f2937; --muted:#6b7280; }
+    body { color:var(--text); }
+    .hero { min-height: 70vh; display:flex; align-items:center; }
+    .btn-cta { padding:.8rem 1.25rem; border-radius:999px; }
+    .features li { margin-bottom:.5rem; }
+    .footer { color:var(--muted); font-size:.9rem; }
   </style>
 </head>
-
 <body>
-  <div class="container search-widget-container">
-    <h1 class="h4 mb-3">Buscador Generative AI (demo estática)</h1>
-
-    <!-- Elemento que abre el widget al hacer clic -->
-    <div class="search-input-wrapper">
-      <input id="searchWidgetTrigger" class="form-control" placeholder="Search here" />
-      <small class="dev-note d-block mt-2">
-        Demo en GitHub Pages: el token se fija en cliente solo para pruebas.
-      </small>
+  <header class="container py-4">
+    <div class="d-flex align-items-center">
+      <img src="/assets/logo.svg" alt="Empresa" height="28" class="mr-2">
+      <span class="sr-only">Inicio</span>
     </div>
+  </header>
 
-    <!-- Widget: por defecto no visible; se abrirá con el trigger -->
-    <gen-search-widget
-      id="gen-search-widget"
-      configId="42c67860-fdf8-44c7-8e16-a507fefe8092"
-      location="eu"
-      triggerId="searchWidgetTrigger">
-    </gen-search-widget>
+  <main class="container hero">
+    <div class="row w-100">
+      <div class="col-lg-8 mx-auto text-center">
+        <h1 class="display-5 mb-3">Búsqueda empresarial con IA</h1>
+        <p class="lead mb-4">Encuentra respuestas y contenidos en segundos con generación asistida por IA.</p>
+        <button id="openSearch" class="btn btn-primary btn-cta" aria-controls="gen-search-widget">
+          Buscar con IA
+        </button>
+        <ul class="list-unstyled features mt-4">
+          <li>Respuesta generativa y resultados verificados.</li>
+          <li>Indexación segura y control de acceso.</li>
+          <li>Disponible en la región EU.</li>
+        </ul>
+      </div>
+    </div>
+  </main>
 
-    <div id="status" class="search-status status-loading" style="display:none;"></div>
-  </div>
+  <gen-search-widget
+    id="gen-search-widget"
+    configId="42c67860-fdf8-44c7-8e16-a507fefe8092"
+    location="eu"
+    triggerId="openSearch"
+    anchorsTarget="_blank"
+    placeholder="Busca aquí con IA">
+  </gen-search-widget>
 
-  <!-- Bundle del widget: cambia hl si necesitas otro idioma, por ejemplo hl=es -->
+  <footer class="container py-4 footer">
+    <div class="d-flex justify-content-between">
+      <span>© 2025 Empresa</span>
+      <a href="/privacidad" class="text-reset">Privacidad</a>
+    </div>
+  </footer>
+
   <script src="https://cloud.google.com/ai/gen-app-builder/client?hl=es"></script>
-
   <script>
-    // Config de DEMO: en producción, NO expongas tokens en el cliente.
-    // Sustituye por un JWT/OAuth real emitido por un backend y recupéralo vía HTTPS.
-    // const DEMO_TOKEN = "fEEQIbHGt16EN_7ZEeOH4g641MehRiMTuHpmfcAtylTVHKhhMuJ3Q2wyO8WJTACmulo_op9qL43tmbPT_3--QYehYoUZfF9BI6EP7_fOkHRvbC_Fo2kH96bKdjn9coEmrR5Au6jFKzziHbeLOIYouA-LQDAG399Kis8J54gOVkM5RiuJxqZbbhsfa1lr97IcUnqbb5W3qsWritBulhaqpZS1UMl6dV11UcylQX1X6_3euOzbn7dRwh4tvibu9VxB-iZ0OWztFbhe4Why_Vxq_risvpiJ9Fs7tciQ0rmvROfrUSwtfvpJZ3nqSe835c2_UpFZWwq1xQ6lnFjwVe6JnZg4JjQXYFpiRje7Jm41Y7rtbhpvf4rhrgewil4qrMFUuMnbIpr1Ql6q17yyawlbr65Ila1u1Va8IY28IqSi8Yc6f7XpU5gbi-4ns8yJmpXVhXV-rSXcJ3J-w029sk9s9ntWk9gIjukJuVigFgFu46r2hZ9ndwQ8_2o6YQeRkOpFsFeq08ucix6W4gRxnYpZ2_jqRdr2gb7kavdtrvpl6Ic96vyywvyBj8633oZ9hVvzh1wnoaSgx1u_8MIWFeckVIi1Z0gi7wdId2xb46JMtl4ce9yaphZJfz3m7sJjiVi5R3hSubO004ej3Q4gg43kxkqjpzW9ek3Onjwljwrj4UB3SWwvUipV_WyfbX4X_o6uVz2kSzB8QBF3I56q36Oe9joUbq5ywxju7-fWSmc2FvMpw6obeBj_MZgY5QSmsp8QjgoF93xgsa3F"; // TODO: reemplazar cuando haya backend
-
-    function setStatus(msg, cls) {
-      const el = document.getElementById('status');
-      el.textContent = msg;
-      el.className = 'search-status ' + cls;
-      el.style.display = 'block';
-    }
-
-    async function initializeSearchWidget() {
-      try {
-        const widget = document.querySelector('#gen-search-widget');
-
-        // Asignar token directamente (equivalente al ejemplo oficial):
-        //   const searchWidget = document.querySelector('gen-search-widget');
-        //   searchWidget.authToken = "<JWT u OAuth>";
-        // widget.authToken = DEMO_TOKEN;
-
-        // setStatus('Token asignado en cliente (DEMO).', 'status-success');
-
-        // Opcional: foco en el trigger para UX
-        const trigger = document.getElementById('searchWidgetTrigger');
-        trigger?.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter') {
-            // El widget se abre automáticamente por triggerId en cuanto el usuario interactúa.
-          }
-        });
-      } catch (err) {
-        console.error(err);
-        setStatus('Error inicializando el widget: ' + (err?.message || err), 'status-error');
-      }
-    }
-
-    // Inicializar cuando el bundle haya cargado y el DOM esté listo
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initializeSearchWidget);
-    } else {
-      initializeSearchWidget();
-    }
+    document.getElementById('openSearch').addEventListener('click', () => {
+      // Con acceso público, el widget se abrirá automáticamente por triggerId
+      // No se necesita token ni lógica adicional
+    });
   </script>
-
-  <!-- Dependencias opcionales (si tu HTML original las usaba) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-          crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-LtrjvnR4Twt/qOuYxB1hV4Z1nE2kskU5I9IY8Yq4YV7LhW0E2kFZ8GvHhZl5n4Z4"
-          crossorigin="anonymous"></script>
 </body>
 </html>
